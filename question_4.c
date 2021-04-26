@@ -4,34 +4,16 @@ int bubbleSort(int *seating);
 
 int main(){
 
-    int seating[] = {};
-    int i = 0, index = 0 ;
+    int seating[10] = {};
+    int i = 0;
     int input = 0;
 
     printf("\n*Please input seating with 10 seat*\n");
+    
     for (i = 0; i < 10; i++){ //將輸入值存入陣列
-        scanf("%[^\n]d",&input);
-        seating[i] = input;
-    }
-    /*呼叫函式*/
-    printSeat(seating);
-    bubbleSort(seating);
-    printSeat(seating);
-
-    /*使迴圈重複執行*/
-    while(input != 0){
-
-        printf("\n*Please input seating with 10 seat*\n");
-
-        for (i = 0; i < 10; i++){
-            scanf("%[^\n]d",&input);
-            seating[i] = input;
-        }
-
-        printSeat(seating);
-        bubbleSort(seating);
-        printSeat(seating);
-    }
+        scanf("%d", &seating[i]);
+    }    
+    bubbleSort(seating);   
 }
 
 
@@ -39,7 +21,6 @@ int bubbleSort(int *seating){
 
     int i = 0, j = 0, temp;
 
-    /*bubble sort*/
     for (i = 0; i < 10; i++){//外迴圈從index = 0 開始跑，內迴圈為i+1
         for (j = i + 1; j < 10; j++){
             if (seating[j] == 0){//遇到0就跳過
@@ -54,7 +35,6 @@ int bubbleSort(int *seating){
     }
     printf("*sorted seating*\n");
     printSeat(seating);
-
 }
 
 int printSeat(int *seating){ //印出陣列
@@ -62,8 +42,7 @@ int printSeat(int *seating){ //印出陣列
     int i = 0;
 
     for (i = 0; i < 10 ; i++){
-        printf("%d ", *seating);
-        seating++;
+        printf("%d ", seating[i]);
     }
     puts("");
     printf("**********");
