@@ -1,0 +1,75 @@
+#include<stdio.h>
+struct bankAccount
+{
+    int id;
+    char name[15];
+    int balance;
+};
+
+void printAccount(struct bankAccount []);
+void withdraw(struct bankAccount []);
+void deposit(struct bankAccount []);
+
+int main(){
+
+    struct bankAccount bank[5];
+
+    int i = 0;
+
+    for (i = 0; i < 5; i++){
+        printf("Please enter user%d's id, name and its balance.\n",(i+1));
+        scanf("%d %s %d", &bank[i].id, bank[i].name, &bank[i].balance);
+    }
+
+    printAccount(bank);
+    
+    int re = 0;
+
+    do{
+        printf("Enter a request:\n");
+        printf("1 --- to deposite.\n");
+        printf("2 --- to withdraw.\n");
+        printf("3 --- to show user in our bank.\n");        
+        scanf("%d", &re);
+
+        if(re == 1){
+            deposit(bank);
+        }
+        else if(re == 2){
+            withdraw(bank);
+        }
+        else{
+            printAccount(bank);
+        }
+
+    }while (re != 3);
+
+}
+
+void printAccount(struct bankAccount bank[]){
+    int i = 0;
+    printf("There are five users in our bank.\n");
+    printf("ID User_name  balance\n");
+    for (i = 0; i < 5;i++){
+        printf("%-3d %-9s %-7d\n", bank[i].id, bank[i].name, bank[i].balance);
+    }
+}
+
+void deposit(struct bankAccount bank[]){
+    int id = 0, money = 0;
+    printf("Enter the user's id and the amount you want to deposite.\n");
+    scanf("%d %d", &id, &money);
+    bank[id].balance += money;
+}
+
+void withdraw(struct bankAccount bank[]){
+    int id = 0, money = 0;
+    printf("Enter the user's id and the amount you want to withdraw.\n");
+    scanf("%d %d", &id, &money);
+    if(money <= bank[id-1].balance){
+        bank[id-1].balance -= money;      
+    }
+    else{
+        printf("Warning : %s's balance is not enough!\n", (bank[id-1].name));  
+    }
+}
